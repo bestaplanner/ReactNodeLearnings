@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Leaders =require('../models/leaders');
+const excelToJson = require('convert-excel-to-json');
 
 const leaderRouter = express.Router();
 
@@ -25,7 +26,9 @@ leaderRouter.route('/')
       console.log('Leader Created ', leader);
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
+
       res.json(leader);
+
   }, (err) => next(err))
   .catch((err) => next(err));
 })
@@ -77,5 +80,4 @@ leaderRouter.route('/:leaderId')
   }, (err) => next(err))
   .catch((err) => next(err));
 });
-
 module.exports = leaderRouter;
