@@ -71,7 +71,7 @@ app.use('/users', usersRouter);
 app.use('/dishes',dishRouter);
 app.use('/promotions',promoRouter);
 app.use('/leaders',leaderRouter);
-app.use('/upload',uploadRouter)
+app.use('/imageUpload',uploadRouter)
 
 
 // catch 404 and forward to error handler
