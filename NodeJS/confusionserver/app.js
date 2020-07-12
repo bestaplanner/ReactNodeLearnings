@@ -22,12 +22,24 @@ const uploadRouter = require('./routes/uploadRouter');
 const url = config.mongoUrl;
 const connect = mongoose.connect(url);
 
-connect.then((db) => {
-    console.log("Connected correctly to server");
-}, (err) => { console.log(err); });
+
 
 
 var app = express();
+
+// Secure traffic only
+app.all('*', (req, res, next) => {
+  if (req.secure) {
+    return next();
+  }
+  else {
+    res.redirect(307, 'https://' + req.hostname + ':' + app.get('secPort') + req.url);
+  }
+});
+
+connect.then((db) => {
+    console.log("Connected correctly to server");
+}, (err) => { console.log(err); });
 
 //app.use(cookieParser('12345-67890-09876-54321'));
 app.use(session({
